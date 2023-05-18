@@ -20,28 +20,15 @@ func routes(_ app: Application) throws {
             {
               "result": "SUCCESS",
               "teams": [
-                { "teamId": 0, "subject": "알고리즘 스터디원 구합니다", "leader": "김진홍", "hashtags": ["#알고리즘", "#Java"], "lastModified": "2023-05-11 01:02:12" },
-                { "teamId": 1, "subject": "알고리즘 스터디원 구합니다", "leader": "조상현", "hashtags": ["#알고리즘", "#SwiftUI"], "lastModified": "2023-05-15 05:32:33" },
-                { "teamId": 2, "subject": "수영 앱 같이 만드실분 구합니다.", "leader": "하헌진", "hashtags": ["#UIKit", "#Combine"], "lastModified": "2023-05-17 05:32:33" }
+                { "teamId": 0, "subject": "개발자를 모집합니다", "leader": "김진홍", "hashtags": ["개발", "프로그래밍"], "lastModified": "2023-05-11 01:02:12" },
+                { "teamId": 1, "subject": "디자이너를 모집합니다", "leader": "조상현", "hashtags": ["UI", "Figma"], "lastModified": "2023-05-15 05:32:33" },
+                { "teamId": 2, "subject": "수영 앱 같이 만드실분 구합니다.", "leader": "하헌진", "hashtags": ["UIKit", "Combine"], "lastModified": "2023-05-17 05:32:33" }
               ]
             }
             """
             return data
         }
-        //        teams.append(Team(teamId: 0,
-        //                          subject: "알고리즘 스터디원 구합니다",
-        //                          leader: "김진홍",
-        //                          hashtags: ["#알고리즘", "#Java"],
-        //                          lastModified: "1시간 전"))
-        //
-        //        teams.append(Team(teamId: 1,
-        //                          subject: "알고리즘 스터디원 구합니다",
-        //                          leader: "조상현",
-        //                          hashtags: ["#알고리즘", "#Swift"],
-        //                          lastModified: "1시간 전"))
     }
-
-
 
     // 엔드포인트 구현
     app.get("teams", ":teamId") { req -> TeamDetail in
@@ -72,7 +59,7 @@ func routes(_ app: Application) throws {
                     Template(type: "image", question: "이력서를 첨부해주세요.", options: nil),
                     Template(type: "radiobox", question: "프로젝트에 대한 기여를 어떻게 생각하시나요?", options: ["적극적으로 참여하겠습니다", "기여할 수 있는 부분에 집중하겠습니다", "다른 역할을 수행하고 싶습니다"])
                 ],
-                lastModified: "2023-05-16 15:30:00",
+                lastModified: "2023-05-11 01:02:12",
                 liked: false
             )
         case 1:
@@ -80,31 +67,32 @@ func routes(_ app: Application) throws {
                 result: "SUCCESS",
                 subject: "디자이너를 모집합니다",
                 leaderId: 5678,
-                hashtags: ["디자인", "그래픽"],
+                hashtags: ["UI", "Figma"],
                 roles: [
-                    Role(name: "그래픽 디자이너", number: 1)
+                    Role(name: "UI 디자이너", number: 1)
                 ],
-                content: "우리 팀에서 그래픽 디자이너를 모집합니다. 다양한 프로젝트에서 창의적인 디자인을 만들어보세요!",
+                content: "우리 팀에서 UI 디자이너를 모집합니다. 다양한 프로젝트에서 창의적인 디자인을 만들어보세요!",
                 applyTemplate: [
                     Template(type: "text", question: "이전 작업물을 링크로 공유해주세요.", options: nil),
                     Template(type: "image", question: "포트폴리오를 첨부해주세요.", options: nil),
                     Template(type: "radiobox", question: "팀 프로젝트에 대한 경험이 있으신가요?", options: ["네", "아니오"])
                 ],
-                lastModified: "2023-05-15 10:45:00",
+                lastModified: "2023-05-15 05:32:33",
                 liked: true
             )
-        case 100:
+        case 2:
             teamDetail = TeamDetail(
                 result: "SUCCESS",
-                subject: "테스트 팀",
+                subject: "수영 앱 같이 만드실분 구합니다.",
                 leaderId: 9999,
-                hashtags: ["테스트", "더미"],
+                hashtags: ["UIKit", "Combine"],
                 roles: [
-                    Role(name: "테스터", number: 3)
+                    Role(name: "iOS 개발자", number: 3),
+                    Role(name: "백엔드 개발자", number: 3)
                 ],
                 content: "이것은 더미 팀입니다. 테스트 용도로 사용됩니다.",
                 applyTemplate: [],
-                lastModified: "2023-05-17 09:00:00",
+                lastModified: "2023-05-17 05:32:33",
                 liked: false
             )
         default:
