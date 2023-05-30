@@ -4,17 +4,20 @@
 //
 //  Created by Heonjin Ha on 2023/05/30.
 //
+// MARK: - WIKI https://github.com/9in-team/Backend/wiki/API-%EC%84%A4%EA%B3%84-%EC%B4%88%EC%95%88
+//
 
 import Vapor
 
 final class TeamsController {
     var teamCreationRequests: [String: Detail] = [:]
 
+    /// * 모집글 목록
+    /// - GET /teams
+    /// - 입력: X
+    /// - 출력: 모집글 목록
     func getTeams(_ req: Request) throws -> String {
-        if false { // Replace with your actual condition
-            throw AppError(description: "Something went wrong")
-        } else {
-            let data = """
+        let data = """
             {
               "result": "SUCCESS",
               "teams": [
@@ -24,19 +27,19 @@ final class TeamsController {
               ]
             }
             """
-            return data
-        }
+        return data
     }
 
+    /// * 모집글 상세 정보
+    /// - GET /teams/{teamId}
+    /// - 입력: teamId
+    /// - 출력: 모집글 상세 정보
     func getTeamDetail(_ req: Request) throws -> TeamDetail {
-        // 요청에서 teamId 가져오기
         guard let teamIdString = req.parameters.get("teamId"),
               let teamId = Int(teamIdString) else {
             throw Abort(.badRequest, reason: "유효하지 않은 teamId입니다")
         }
 
-        // 데이터베이스나 다른 저장소에서 팀 상세 정보 가져오기
-        // 여기서는 더미 데이터를 사용합니다
         var teamDetail: TeamDetail
 
         switch teamId {
@@ -99,7 +102,12 @@ final class TeamsController {
         return teamDetail
     }
 
-    func createTeam(_ req: Request) throws -> Detail {
+    /// * 모집글 작성
+    /// - POST /team/{accountId}
+    /// - 입력: 제목, 태그, 모집 역할, 설명, 지원 양식
+    /// - 출력: 모집글 목록
+    /// - 출력: 결과
+    func createTeam(_ req: Request) throws -> EventLoopFuture<Detail> {
         // Get the accountId from the request
         guard let accountId = req.parameters.get("accountId") else {
             throw Abort(.badRequest, reason: "Invalid accountId")
@@ -121,7 +129,7 @@ final class TeamsController {
 
             teamCreationRequests[accountId] = result
 
-            return result
+            return req.eventLoop.makeSucceededFuture(result)
         } catch {
             throw Abort(.badRequest, reason: "Invalid Request")
         }
