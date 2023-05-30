@@ -23,7 +23,6 @@ final class MyWishListTeamController {
                 { teamId: 1, subject: "제목", hashtags: ["a", "b"], lastModified: "yyyy-MM-dd HH:mm:ss" }
               ]
             }
-            { result: "ERROR", description: "" }
             """
         return data
     }

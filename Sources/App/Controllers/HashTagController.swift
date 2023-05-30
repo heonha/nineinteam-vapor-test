@@ -23,7 +23,6 @@ final class HashTagController {
                 { name: "iOS", count: 1, subscribing: true }
               ]
             }
-            { result: "ERROR", description: "" }
             """
         return data
     }

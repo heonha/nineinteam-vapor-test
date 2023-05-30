@@ -16,6 +16,7 @@ final class MyWishListTeam {
     ///   - 출력: 대화중인 대화방 목록
     ///
     func getChats(_ req: Request) throws -> String {
+
         let data = """
             {
               result: "SUCCESS",
@@ -24,7 +25,6 @@ final class MyWishListTeam {
                 { roomId: 1, relatedTeamId: 123, relatedTeamSubject: "제목", recentMessage: "가장 최근 메시지" },
               ]
             }
-            { result: "ERROR", description: "" }
             """
         return data
     }
