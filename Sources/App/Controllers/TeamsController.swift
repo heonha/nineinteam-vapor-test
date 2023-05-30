@@ -107,7 +107,7 @@ final class TeamsController {
 
     /// **모집글 작성**
     /// - Parameters:
-    ///   - METHOD: POST /team/{accountId}
+    ///   - METHOD: POST /teams/{accountId}
     ///   - 입력: 제목, 태그, 모집 역할, 설명, 지원 양식
     ///   - 출력: 모집글 목록
     func createTeam(_ req: Request) throws -> EventLoopFuture<Detail> {

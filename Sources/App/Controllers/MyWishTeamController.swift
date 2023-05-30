@@ -7,7 +7,7 @@
 
 import Vapor
 
-final class MyWishListTeamController {
+final class MyWishTeamController {
 
     /// **내 찜 리스트 조회**
     /// - Parameters:
@@ -19,8 +19,8 @@ final class MyWishListTeamController {
             {
               result: "SUCCESS",
               teams: [
-                { teamId: 0, subject: "제목", hashtags: ["a", "b"], lastModified: "yyyy-MM-dd HH:mm:ss" },
-                { teamId: 1, subject: "제목", hashtags: ["a", "b"], lastModified: "yyyy-MM-dd HH:mm:ss" }
+                { teamId: 0, subject: "제목1", hashtags: ["aaa", "bbb"], lastModified: "2023-05-29 11:09:19" },
+                { teamId: 1, subject: "제목2", hashtags: ["aaa", "ccc"], lastModified: "2023-05-30 21:09:19" }
               ]
             }
             """

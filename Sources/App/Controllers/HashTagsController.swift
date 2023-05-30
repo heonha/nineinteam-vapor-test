@@ -7,7 +7,7 @@
 
 import Vapor
 
-final class HashTagController {
+final class HashTagsController {
 
     /// **해시태그 목록**
     /// - Parameters:
