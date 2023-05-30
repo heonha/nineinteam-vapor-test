@@ -137,9 +137,163 @@ final class TeamsController {
             throw Abort(.badRequest, reason: "Invalid Request")
         }
     }
+}
 
+extension TeamsController {
+
+    /// **해시태그 조회**
+    /// - Parameters:
+    ///   - METHOD: GET /team/hashtag
+    ///   - 출력: project 변수는 project에 대한 해시태그 study 변수는 study에 대한 해시태그
+    func getHashtag(_ req: Request) throws -> String {
+        let data = """
+            {
+                "detail": {
+                    "project": [
+                        {
+                            "name": "PYTHON",
+                            "value": "Python"
+                        },
+                        {
+                            "name": "SPRING_FRAMEWORK",
+                            "value": "Spring Framework"
+                        },
+                        {
+                            "name": "AWS",
+                            "value": "AWS"
+                        },
+                        {
+                            "name": "IOS",
+                            "value": "iOS"
+                        },
+                        {
+                            "name": "JAVASCRIPT",
+                            "value": "JavaScript"
+                        },
+                        {
+                            "name": "HTML",
+                            "value": "HTML"
+                        },
+                        {
+                            "name": "JAVA",
+                            "value": "Java"
+                        },
+                        {
+                            "name": "C_SHARP",
+                            "value": "C#"
+                        },
+                        {
+                            "name": "C_PLUS_PLUS",
+                            "value": "C++"
+                        },
+                        {
+                            "name": "REACT",
+                            "value": "React.js"
+                        },
+                        {
+                            "name": "NODE",
+                            "value": "Node.js"
+                        },
+                        {
+                            "name": "VUE",
+                            "value": "Vue.js"
+                        },
+                        {
+                            "name": "MYSQL",
+                            "value": "MySQL"
+                        },
+                        {
+                            "name": "KOTLIN",
+                            "value": "Kotlin"
+                        },
+                        {
+                            "name": "ANDROID",
+                            "value": "Android"
+                        },
+                        {
+                            "name": "SQL",
+                            "value": "SQL"
+                        }
+                    ],
+                    "study": [
+                        {
+                            "name": "PYTHON",
+                            "value": "Python"
+                        },
+                        {
+                            "name": "SPRING_FRAMEWORK",
+                            "value": "Spring Framework"
+                        },
+                        {
+                            "name": "AWS",
+                            "value": "AWS"
+                        },
+                        {
+                            "name": "IOS",
+                            "value": "iOS"
+                        },
+                        {
+                            "name": "JAVASCRIPT",
+                            "value": "JavaScript"
+                        },
+                        {
+                            "name": "HTML",
+                            "value": "HTML"
+                        },
+                        {
+                            "name": "JAVA",
+                            "value": "Java"
+                        },
+                        {
+                            "name": "C_SHARP",
+                            "value": "C#"
+                        },
+                        {
+                            "name": "C_PLUS_PLUS",
+                            "value": "C++"
+                        },
+                        {
+                            "name": "REACT",
+                            "value": "React.js"
+                        },
+                        {
+                            "name": "NODE",
+                            "value": "Node.js"
+                        },
+                        {
+                            "name": "VUE",
+                            "value": "Vue.js"
+                        },
+                        {
+                            "name": "MYSQL",
+                            "value": "MySQL"
+                        },
+                        {
+                            "name": "KOTLIN",
+                            "value": "Kotlin"
+                        },
+                        {
+                            "name": "ANDROID",
+                            "value": "Android"
+                        },
+                        {
+                            "name": "SQL",
+                            "value": "SQL"
+                        },
+                        {
+                            "name": "ALGORITHM",
+                            "value": "알고리즘"
+                        }
+                    ]
+                },
+                "errorMessage": null
+            }
+            """
+        return data
+    }
 
 }
+
 
 extension TeamsController {
 
