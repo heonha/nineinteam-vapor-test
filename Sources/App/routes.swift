@@ -1,38 +1,76 @@
 import Vapor
 
+func restartServer(app: Application) throws {
+    // 서버 중지
+    app.shutdown()
+
+    // 서버 재시작 명령 실행
+    let vaporPath = "/path/to/vapor"  // Vapor 실행 파일 경로
+    let arguments = ["run"]  // Vapor 명령 인수
+    let process = Process()
+    process.executableURL = URL(fileURLWithPath: vaporPath)
+    process.arguments = arguments
+
+    do {
+        try process.run()
+    } catch {
+        // 서버 재시작 실패
+        print("Failed to restart server: \(error)")
+    }
+}
+
+
 func routes(_ app: Application) throws {
+    
     app.get { req async in
         "It works!"
     }
 
-    app.get("hello") { req async -> String in
-        "Hello, world!"
-    }
+    let gitHubWebhookController = GitHubWebhookController()
+    app.post("github-webhook", use: gitHubWebhookController.handle)
 
-    app.get("github-webhook") { req async -> String in
-        "github-webhook"
-    }
+    // MARK: - Github WebHook
+    app.post("github-webhook") { req -> EventLoopFuture<Response> in
+        // 웹훅 이벤트 처리 로직을 구현합니다.
+        // req.body에서 웹훅 데이터를 추출하고, 필요한 작업을 수행합니다.
 
-    app.post("github-webhook") { req -> EventLoopFuture<HTTPStatus> in
-        // GitHub Webhook POST 요청을 처리하는 로직을 구현합니다.
-        guard let payload = req.body.string else {
-            throw Abort(.badRequest, reason: "Missing request body")
+        // Secret 키 검증 로직
+        guard let secretKey = Environment.get("SECRET_TOKEN") else {
+            throw Abort(.internalServerError, reason: "No SECRET_TOKEN in environment")
+        }
+        guard let signature = req.headers.first(name: "X-Hub-Signature-256"),
+              let payload = req.body.string else {
+            throw Abort(.unauthorized, reason: "Signature or Payload missing")
         }
 
-        // JSON 데이터를 추출하여 필요한 작업을 수행합니다.
-        // 예를 들어, 추출한 JSON 데이터를 파싱하고 원하는 로직을 수행할 수 있습니다.
-        let jsonDecoder = JSONDecoder()
-        let webhookData = try jsonDecoder.decode(WebhookData.self, from: Data(payload.utf8))
+        do {
+            let isVerified = try verifySignature(payload: payload, secretKey: secretKey, signature: signature)
+            guard isVerified else {
+                throw Abort(.unauthorized, reason: "Signature did not match")
+            }
+        } catch let error {
+            return req.eventLoop.makeFailedFuture(error)
+        }
 
-        // 필요한 작업을 수행하고 원하는 응답을 반환합니다.
-        // 예를 들어, 로직에 따라 응답 메시지를 생성하고 반환할 수 있습니다.
-        let responseMessage = "Webhook received successfully. Event: \(webhookData.event)"
-        let response = MyResponse(message: responseMessage)
+        // 웹훅 이벤트 처리 후 서버 재시작
+        do {
+            try restartServer(app: app)
+        } catch {
+            // 서버 재시작 실패
+            return req.eventLoop.makeFailedFuture(error)
+        }
 
-        // MyResponse를 EventLoopFuture로 감싸서 비동기적으로 반환합니다.
-        return req.eventLoop.future(response).transform(to: .ok)
+        // 응답 생성
+        let responseJSON: [String: String] = [
+            "content_type": "json",
+            "insecure_ssl": "0",
+            "secret": "",
+            "url": "https://example.com/webhook"
+        ]
+        let response = Response(status: .ok, headers: HTTPHeaders([("Content-Type", "application/json")]))
+        try response.content.encode(responseJSON, as: .json)
+        return req.eventLoop.makeSucceededFuture(response)
     }
-
 
     // 4. Register the middleware
     app.middleware.use(ErrorMiddleware())
@@ -232,5 +270,3 @@ struct Detail: Content {
     let subjectType: String
     let roles: [Role]
 }
-
-
