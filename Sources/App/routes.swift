@@ -12,8 +12,6 @@ func routes(_ app: Application) throws {
     app.get("teams", use: teamsController.getTeams)
     app.get("teams", ":teamId", use: teamsController.getTeamDetail)
     app.get("teams", "hashtag", use: teamsController.getHashtag)
-    app.get("teams", "hashtag", use: teamsController.getHashtag)
-    app.get("teams", use: teamsController.getTeamCreationRequests)
     app.post("teams", ":accountId", use: teamsController.createTeam)
 
     let hashtagsController = HashTagsController()
