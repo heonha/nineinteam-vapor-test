@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ErrorResponse.swift
 //  
 //
 //  Created by Heonjin Ha on 2023/05/30.
