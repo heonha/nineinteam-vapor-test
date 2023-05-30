@@ -13,6 +13,26 @@ func routes(_ app: Application) throws {
         "github-webhook"
     }
 
+    app.post("github-webhook") { req -> EventLoopFuture<HTTPStatus> in
+        // GitHub Webhook POST 요청을 처리하는 로직을 구현합니다.
+        guard let payload = req.body.string else {
+            throw Abort(.badRequest, reason: "Missing request body")
+        }
+
+        // JSON 데이터를 추출하여 필요한 작업을 수행합니다.
+        // 예를 들어, 추출한 JSON 데이터를 파싱하고 원하는 로직을 수행할 수 있습니다.
+        let jsonDecoder = JSONDecoder()
+        let webhookData = try jsonDecoder.decode(WebhookData.self, from: Data(payload.utf8))
+
+        // 필요한 작업을 수행하고 원하는 응답을 반환합니다.
+        // 예를 들어, 로직에 따라 응답 메시지를 생성하고 반환할 수 있습니다.
+        let responseMessage = "Webhook received successfully. Event: \(webhookData.event)"
+        let response = MyResponse(message: responseMessage)
+
+        // MyResponse를 EventLoopFuture로 감싸서 비동기적으로 반환합니다.
+        return req.eventLoop.future(response).transform(to: .ok)
+    }
+
 
     // 4. Register the middleware
     app.middleware.use(ErrorMiddleware())
