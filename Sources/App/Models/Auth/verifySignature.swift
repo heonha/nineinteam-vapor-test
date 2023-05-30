@@ -6,8 +6,6 @@
 //
 
 import Vapor
-import Crypto
-
 import CryptoKit
 
 func verifySignature(payload: String, secretKey: String, signature: String) throws -> Bool {

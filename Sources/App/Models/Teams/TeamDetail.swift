@@ -7,7 +7,6 @@
 
 import Vapor
 
-// 1. Define your data types
 struct TeamDetail: Content {
     var result: String
     var subject: String
