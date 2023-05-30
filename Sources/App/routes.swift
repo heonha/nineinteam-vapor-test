@@ -9,6 +9,11 @@ func routes(_ app: Application) throws {
         "Hello, world!"
     }
 
+    app.get("github-webhook") { req async -> String in
+        "github-webhook"
+    }
+
+
     // 4. Register the middleware
     app.middleware.use(ErrorMiddleware())
     // 5. Throw error in route
@@ -102,45 +107,44 @@ func routes(_ app: Application) throws {
         return teamDetail
     }
 
-    var teamCreationRequests: [String: TeamCreationRequest] = [:]
+    var teamCreationRequests: [String: Detail] = [:]
 
     // Implement the POST endpoint
-    app.post("team", ":accountId") { req -> TeamCreationRequest in
+    app.post("team", ":accountId") { req -> Detail in
         // Get the accountId from the request
         guard let accountId = req.parameters.get("accountId") else {
             throw Abort(.badRequest, reason: "Invalid accountId")
         }
 
         // Decode the team creation request from the request body
-        let teamCreationRequest = try req.content.decode(TeamCreationRequest.self)
+        do {
+            let request = try req.content.decode(TeamCreationRequest.self)
+            let teamId = UUID().hashValue
+            let openChatUrl = request.openChatUrl
+            let content = request.content
+            let subject = request.subject
+            let teamTemplates = request.teamTemplates
+            let types = request.types
+            let subjectType = request.subjectType
+            let roles = request.roles
 
-        // Store the team creation request in the dictionary with accountId as the key
-        teamCreationRequests[accountId] = teamCreationRequest
+            let result = Detail(teamId: teamId, openChatUrl: openChatUrl, content: content, subject: subject, teamTemplates: teamTemplates, types: types, subjectType: subjectType, roles: roles)
 
-        // Return the stored team creation request
-        return teamCreationRequest
+            teamCreationRequests[accountId] = result
+
+            return result
+        } catch {
+            throw Abort(.badRequest, reason: "Invalid Request")
+        }
     }
 
-    // Implement the GET endpoint to retrieve the team creation request by accountId
-    app.get("team", ":accountId") { req -> TeamCreationRequest in
-        // Get the accountId from the request
-        guard let accountId = req.parameters.get("accountId") else {
-            throw Abort(.badRequest, reason: "Invalid accountId")
-        }
-
-        // Retrieve the team creation request from the dictionary based on accountId
-        guard let teamCreationRequest = teamCreationRequests[accountId] else {
-            throw Abort(.notFound, reason: "Team creation request not found")
-        }
-
-        // Return the team creation request
-        return teamCreationRequest
-    }
-
-    app.get("team") { req -> [String : TeamCreationRequest] in
+    app.get("team") { req -> [String : Detail] in
         // Return the array of team creation requests
         return teamCreationRequests
     }
+
+
+
 
 
 }
@@ -192,14 +196,21 @@ struct TeamCreationRequest: Content {
     var subjectType: String
     var subject: String
     var types: [String]
-    var roles: [RoleCreationRequest]
+    var roles: [Role]
     var content: String
     var teamTemplates: [Template]
     var openChatUrl: String
 }
 
-struct RoleCreationRequest: Content {
-    var name: String
-    var requiredCount: Int
+struct Detail: Content {
+    let teamId: Int
+    let openChatUrl: String
+    let content: String
+    let subject: String
+    let teamTemplates: [Template]
+    let types: [String]
+    let subjectType: String
+    let roles: [Role]
 }
+
 
