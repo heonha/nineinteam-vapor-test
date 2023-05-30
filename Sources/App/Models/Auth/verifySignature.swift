@@ -6,7 +6,7 @@
 //
 
 import Vapor
-import CryptoKit
+import Crypto
 
 func verifySignature(payload: String, secretKey: String, signature: String) throws -> Bool {
     // Check if signature header is provided
