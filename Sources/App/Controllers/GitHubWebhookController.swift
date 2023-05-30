@@ -15,6 +15,7 @@ final class GitHubWebhookController {
         guard let secretKey = Environment.get("SECRET_TOKEN") else {
             throw Abort(.internalServerError, reason: "No SECRET_TOKEN in environment")
         }
+
         guard let signature = req.headers.first(name: "X-Hub-Signature-256"),
               let payload = req.body.string else {
             throw Abort(.unauthorized, reason: "Signature or Payload missing")
@@ -33,17 +34,17 @@ final class GitHubWebhookController {
         do {
             try restartServer(app: req.application)
         } catch {
-            // 서버 재시작 실패
             return req.eventLoop.makeFailedFuture(error)
         }
 
-        // 응답 생성
+        // FIXME: 실제 응답 데이터로 변경하기
         let responseJSON: [String: String] = [
             "content_type": "json",
             "insecure_ssl": "0",
             "secret": "********",
             "url": "https://example.com/webhook"
         ]
+        
         let response = Response(status: .ok, headers: HTTPHeaders([("Content-Type", "application/json")]))
         try response.content.encode(responseJSON, as: .json)
         return req.eventLoop.makeSucceededFuture(response)
