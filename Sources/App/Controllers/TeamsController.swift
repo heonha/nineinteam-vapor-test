@@ -9,13 +9,15 @@
 
 import Vapor
 
+/// -  Endpoint **/Teams**
 final class TeamsController {
     var teamCreationRequests: [String: Detail] = [:]
 
-    /// * 모집글 목록
-    /// - GET /teams
-    /// - 입력: X
-    /// - 출력: 모집글 목록
+    /// **모집글 목록**
+    /// - Parameters:
+    ///   - METHOD: GET /teams
+    ///   - 입력: X
+    ///   - 출력: 모집글 목록
     func getTeams(_ req: Request) throws -> String {
         let data = """
             {
@@ -30,10 +32,11 @@ final class TeamsController {
         return data
     }
 
-    /// * 모집글 상세 정보
-    /// - GET /teams/{teamId}
-    /// - 입력: teamId
-    /// - 출력: 모집글 상세 정보
+    /// **모집글 상세 정보**
+    /// - Parameters:
+    ///   - METHOD: GET /teams/{teamId}
+    ///   - 입력: teamId
+    ///   - 출력: 모집글 상세 정보
     func getTeamDetail(_ req: Request) throws -> TeamDetail {
         guard let teamIdString = req.parameters.get("teamId"),
               let teamId = Int(teamIdString) else {
@@ -102,11 +105,11 @@ final class TeamsController {
         return teamDetail
     }
 
-    /// * 모집글 작성
-    /// - POST /team/{accountId}
-    /// - 입력: 제목, 태그, 모집 역할, 설명, 지원 양식
-    /// - 출력: 모집글 목록
-    /// - 출력: 결과
+    /// **모집글 작성**
+    /// - Parameters:
+    ///   - METHOD: POST /team/{accountId}
+    ///   - 입력: 제목, 태그, 모집 역할, 설명, 지원 양식
+    ///   - 출력: 모집글 목록
     func createTeam(_ req: Request) throws -> EventLoopFuture<Detail> {
         // Get the accountId from the request
         guard let accountId = req.parameters.get("accountId") else {
@@ -135,7 +138,13 @@ final class TeamsController {
         }
     }
 
+
+}
+
+extension TeamsController {
+
     func getTeamCreationRequests(_ req: Request) throws -> [String : Detail] {
         return teamCreationRequests
     }
+
 }
