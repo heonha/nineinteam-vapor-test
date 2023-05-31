@@ -19,7 +19,7 @@ func routes(_ app: Application) throws {
 
     let mySubscriptionController = MySubscriptionController()
     app.get("mySubscription", "notifications", use: mySubscriptionController.getNotifications)
-    app.get("mySubscription", "hashtags", use: mySubscriptionController.getNotifications)
+//    app.get("mySubscription", "hashtags", use: mySubscriptionController.getNotifications)
 
     let myWishTeamController = MyWishTeamController()
     app.get("myWishTeam", use: myWishTeamController.getMyWishTeam)

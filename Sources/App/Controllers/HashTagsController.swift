@@ -17,10 +17,27 @@ final class HashTagsController {
     func getHashtags(_ req: Request) throws -> String {
         let data = """
             {
-              result: "SUCCESS",
-              list: [
-                { name: "Backend", count: 999 },
-                { name: "iOS", count: 1, subscribing: true }
+              "result": "SUCCESS",
+              "list": [
+                {
+                  "name": "Backend",
+                  "count": 999
+                },
+                {
+                  "name": "iOS",
+                  "count": 611,
+                  "subscribing": true
+                },
+                {
+                  "name": "Android",
+                  "count": 576,
+                  "subscribing": true
+                },
+                {
+                  "name": "Flutter",
+                  "count": 321,
+                  "subscribing": true
+                },
               ]
             }
             """

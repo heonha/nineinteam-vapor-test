@@ -17,10 +17,20 @@ final class MyWishTeamController {
     func getMyWishTeam(_ req: Request) throws -> String {
         let data = """
             {
-              result: "SUCCESS",
-              teams: [
-                { teamId: 0, subject: "제목1", hashtags: ["aaa", "bbb"], lastModified: "2023-05-29 11:09:19" },
-                { teamId: 1, subject: "제목2", hashtags: ["aaa", "ccc"], lastModified: "2023-05-30 21:09:19" }
+              "result": "SUCCESS",
+              "teams": [
+                {
+                  "teamId": 0,
+                  "subject": "개발자를 모집합니다",
+                  "hashtags": ["개발", "프로그래밍"],
+                  "lastModified": "2023-05-11 01:02:12"
+                },
+                {
+                  "teamId": 1,
+                  "subject": "디자이너를 모집합니다",
+                  "hashtags": ["UI", "Figma"],
+                  "lastModified": "2023-05-15 05:32:33"
+                }
               ]
             }
             """
