@@ -36,8 +36,8 @@ final class HashTagsController {
                 {
                   "name": "Flutter",
                   "count": 321,
-                  "subscribing": true
-                },
+                  "subscribing": false
+                }
               ]
             }
             """
