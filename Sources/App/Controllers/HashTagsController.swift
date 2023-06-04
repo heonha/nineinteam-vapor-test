@@ -20,23 +20,39 @@ final class HashTagsController {
               "result": "SUCCESS",
               "list": [
                 {
+                  "type": "project",
                   "name": "Backend",
                   "count": 999
                 },
                 {
+                  "type": "project",
                   "name": "iOS",
                   "count": 611,
                   "subscribing": true
                 },
                 {
+                  "type": "project",
                   "name": "Android",
                   "count": 576,
                   "subscribing": true
                 },
                 {
+                  "type": "project",
                   "name": "Flutter",
                   "count": 321,
                   "subscribing": false
+                },
+                {
+                  "type": "study",
+                  "name": "알고리즘",
+                  "count": 304,
+                  "subscribing": false
+                },
+                {
+                  "type": "study",
+                  "name": "Figma",
+                  "count": 698,
+                  "subscribing": true
                 }
               ]
             }
