@@ -21,15 +21,17 @@ final class MyWishTeamController {
               "teams": [
                 {
                   "teamId": 0,
+                  "leader": "김진홍",
                   "subject": "개발자를 모집합니다",
                   "hashtags": ["개발", "프로그래밍"],
                   "lastModified": "2023-05-11 01:02:12"
                 },
                 {
                   "teamId": 1,
+                  "leader": "조상현",
                   "subject": "디자이너를 모집합니다",
                   "hashtags": ["UI", "Figma"],
-                  "lastModified": "2023-05-15 05:32:33"
+                  "lastModified": "2023-03-15 05:32:33"
                 }
               ]
             }

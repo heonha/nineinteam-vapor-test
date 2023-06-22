@@ -21,12 +21,77 @@ final class TeamsController {
     func getTeams(_ req: Request) throws -> String {
         let data = """
             {
-              "result": "SUCCESS",
-              "teams": [
-                { "teamId": 0, "subject": "개발자를 모집합니다", "leader": "김진홍", "hashtags": ["개발", "프로그래밍"], "lastModified": "2023-05-11 01:02:12" },
-                { "teamId": 1, "subject": "디자이너를 모집합니다", "leader": "조상현", "hashtags": ["UI", "Figma"], "lastModified": "2023-05-15 05:32:33" },
-                { "teamId": 2, "subject": "수영 앱 같이 만드실분 구합니다.", "leader": "하헌진", "hashtags": ["UIKit", "Combine"], "lastModified": "2023-05-17 05:32:33" }
-              ]
+                "result": "SUCCESS",
+                "teams": [
+                    {
+                        "result": "SUCCESS",
+                        "teams": [
+                            {
+                                "teamId": 0,
+                                "leader": "김진홍",
+                                "subject": "개발자를 모집합니다",
+                                "hashtags": [
+                                    "개발",
+                                    "프로그래밍"
+                                ],
+                                "lastModified": "2023-05-11 01:02:12"
+                            },
+                            {
+                                "teamId": 1,
+                                "leader": "조상현",
+                                "subject": "디자이너를 모집합니다",
+                                "hashtags": [
+                                    "UI",
+                                    "Figma"
+                                ],
+                                "lastModified": "2023-03-15 05:32:33"
+                            },
+                            {
+                                "teamId": 2,
+                                "subject": "수영 앱 같이 만드실분 구합니다.",
+                                "leader": "하헌진",
+                                "hashtags": [
+                                    "UIKit",
+                                    "Combine"
+                                ],
+                                "lastModified": "2023-05-17 05:32:33"
+                            },
+                            {
+                                "teamId": 5,
+                                "leader": "윤지민",
+                                "subject": "풀스택 개발자를 모집합니다",
+                                "hashtags": [
+                                    "프론트엔드",
+                                    "백엔드",
+                                    "웹개발"
+                                ],
+                                "lastModified": "2023-06-22 09:56:43"
+                            },
+                            {
+                                "teamId": 6,
+                                "leader": "이동욱",
+                                "subject": "모바일 앱 개발자를 모집합니다",
+                                "hashtags": [
+                                    "안드로이드",
+                                    "iOS",
+                                    "모바일앱"
+                                ],
+                                "lastModified": "2023-06-22 14:20:18"
+                            },
+                            {
+                                "teamId": 7,
+                                "leader": "송미래",
+                                "subject": "시스템 개발자를 모집합니다",
+                                "hashtags": [
+                                    "시스템",
+                                    "인프라",
+                                    "네트워크"
+                                ],
+                                "lastModified": "2023-06-22 17:45:09"
+                            }
+                        ]
+                    }
+                ]
             }
             """
         return data
