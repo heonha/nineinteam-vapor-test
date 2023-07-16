@@ -94,49 +94,61 @@ final class ChatsController {
         case 1:
             return """
             {
-            "result": "SUCCESS",
-            "chats": [
-            {
-            "roomId": 1,
-            "userId": "user789",
-            "message": "안녕하세요! 스마트 홈 자동화 프로젝트에 흥미가 있어서 참여하고 싶습니다.",
-            "createdAt": "2023-05-30 10:00:30"
-            },
-            {
-            "roomId": 1,
-            "userId": "admin456",
-            "message": "반갑습니다! 스마트 홈 자동화 프로젝트 팀에 참여하실 수 있습니다. 어떤 분야에서 기여하실 수 있나요?",
-            "createdAt": "2023-05-30 10:01:15"
+              "result": "SUCCESS",
+              "chats": [
+                {
+                  "roomId": 1,
+                  "userId": "user789",
+                  "message": "안녕하세요! 스마트 홈 자동화 프로젝트에 흥미가 있어서 참여하고 싶습니다.",
+                  "createdAt": "2023-05-30 10:00:30"
+                },
+                {
+                  "roomId": 1,
+                  "userId": "admin456",
+                  "message": "반갑습니다! 스마트 홈 자동화 프로젝트 팀에 참여하실 수 있습니다. 어떤 분야에서 기여하실 수 있나요?",
+                  "createdAt": "2023-05-30 10:01:15"
+                }
+              ]
             }
             """
         case 2:
             return """
             {
-            "roomId": 2,
-            "userId": "user987",
-            "message": "안녕하세요! 영화 추천 알고리즘 개발 프로젝트에 관심이 있어서 참여하고 싶습니다.",
-            "createdAt": "2023-05-30 11:30:50"
-            },
-            {
-            "roomId": 2,
-            "userId": "admin123",
-            "message": "반갑습니다! 영화 추천 알고리즘 개발 프로젝트 팀에서는 어떤 기술 스택을 사용하고 있나요?",
-            "createdAt": "2023-05-30 11:31:25"
+              "result": "SUCCESS",
+              "chats": [
+                {
+                  "roomId": 2,
+                  "userId": "user987",
+                  "message": "안녕하세요! 영화 추천 알고리즘 개발 프로젝트에 관심이 있어서 참여하고 싶습니다.",
+                  "createdAt": "2023-05-30 11:30:50"
+                },
+                {
+                  "roomId": 2,
+                  "userId": "admin123",
+                  "message": "반갑습니다! 영화 추천 알고리즘 개발 프로젝트 팀에서는 어떤 기술 스택을 사용하고 있나요?",
+                  "createdAt": "2023-05-30 11:31:25"
+                }
+              ]
             }
             """
         case 3:
             return """
             {
-            "roomId": 3,
-            "userId": "user456",
-            "message": "안녕하세요! 블록체인 기반 보험 서비스 프로젝트에 참여하고 싶습니다.",
-            "createdAt": "2023-05-30 14:10:20"
-            },
-            {
-            "roomId": 3,
-            "userId": "admin789",
-            "message": "반갑습니다! 블록체인 기반 보험 서비스 프로젝트 팀에서는 스마트 계약을 개발하는 데 어떤 기술을 활용하고 있나요?",
-            "createdAt": "2023-05-30 14:11:05"
+              "result": "SUCCESS",
+              "chats": [
+                {
+                  "roomId": 3,
+                  "userId": "user456",
+                  "message": "안녕하세요! 블록체인 기반 보험 서비스 프로젝트에 참여하고 싶습니다.",
+                  "createdAt": "2023-05-30 14:10:20"
+                },
+                {
+                  "roomId": 3,
+                  "userId": "admin789",
+                  "message": "반갑습니다! 블록체인 기반 보험 서비스 프로젝트 팀에서는 스마트 계약을 개발하는 데 어떤 기술을 활용하고 있나요?",
+                  "createdAt": "2023-05-30 14:11:05"
+                }
+              ]
             }
             """
         default:
